@@ -1,0 +1,19 @@
+#! /usr/bin/env node
+
+var parse = require('csv-parse')
+var fs = require('fs')
+var csv = fs.readFileSync('data/manual-test-results.csv') + ''
+
+parse(csv, null, function(err, lines){
+  lines = lines.slice(1)
+  var results = lines.map(convert)
+  console.log(results)
+})
+
+function convert(line){
+  return {
+    module: line[0],
+    passed: line[1] === 'pass',
+    tester: line[2]
+  }
+}

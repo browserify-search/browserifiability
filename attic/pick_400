@@ -1,0 +1,31 @@
+#! /usr/bin/env node
+
+var db = require('../lib/db')
+var pickX = require('../lib/pick_x')
+var fs = require('fs')
+
+db(function(err, db){
+  if (err) return console.error(err.message)
+
+  var moduleNames = []
+  var modules = db.collection('modules')
+  var criteria = {
+    'testResults.browserify.test.passed': true
+  }
+  var cursor = modules.find(criteria, {name: true})
+
+  cursor.each(function(err, module){
+    if (err) console.error(err.message)
+    if (!module) return end()
+    moduleNames.push(module.name)
+  })
+
+  function end(){
+    var selected = pickX(moduleNames, 400)
+    console.log('Picking 400 out of', moduleNames.length)
+    fs.writeFileSync('data/samples.json',
+      JSON.stringify(selected, null, '  '))
+    console.log('Written to data/samples.json')
+    db.close()
+  }
+})

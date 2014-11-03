@@ -1,0 +1,34 @@
+#! /usr/bin/env node
+
+var db = require('../lib/db')
+var fs = require('fs')
+var async = require('async')
+var log = require('npmlog')
+
+var summary = JSON.parse(fs.readFileSync('data/test-summary.json') + '')
+
+db(function(err, db){
+  if (err) return console.error(err.message)
+
+  var TestSummary = db.collection('test_summary')
+
+  TestSummary.remove(function(err){
+    if (err){
+      console.error(err.message)
+      db.close()
+    }
+    async.eachLimit(summary, 20, 
+      function(entry, next){
+        TestSummary.insert(entry, function(err){
+          if (err) log.error(entry.module, err.message)
+          else log.info(entry.module, 'import success')
+          next()
+        })
+      }, function(err){
+        if (err) log.error(err.message)
+        else log.info('ok')
+        db.close()
+      }
+    )
+  })
+})
