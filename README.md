@@ -1,7 +1,7 @@
 browserifiability
 =================
 
-Determine the browserifiability of a module on npm.
+Determine the browserifiability of a module on npm - the probability that a module will work with browserify.
 
 ## Usage
 
@@ -47,4 +47,10 @@ var module = {
     }
   }
 }
+```
+
+Output:
+
+```
+0.9346094492725097
 ```
