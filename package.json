@@ -1,0 +1,22 @@
+{
+  "name": "browserifiability",
+  "version": "0.0.0",
+  "description": "Determine the browserifiability of a module on npm.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:browserify-search/browserifiability.git"
+  },
+  "keywords": [
+    "browserify"
+  ],
+  "author": "Toby Ho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/browserify-search/browserifiability/issues"
+  },
+  "homepage": "https://github.com/browserify-search/browserifiability"
+}
