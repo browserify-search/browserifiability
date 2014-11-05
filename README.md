@@ -6,10 +6,14 @@ Determine the browserifiability of a module on npm - the probability that a modu
 ## Usage
 
 ```js
-browserifiability(module, function(err, results){
-  if (err) return console.error(err.message)
-  console.log(results)
-})
+var score = browserifiability(module)
+console.log(results)
+```
+
+Output:
+
+```
+0.9346094492725097
 ```
 
 Where `module` is a object like
@@ -49,8 +53,3 @@ var module = {
 }
 ```
 
-Output:
-
-```
-0.9346094492725097
-```

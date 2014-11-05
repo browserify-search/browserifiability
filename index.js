@@ -21,7 +21,7 @@ module.exports = function(module, callback){
     })
   )
 
-  callback(null, browserifiability(module, testSummary, criteria))
+  return browserifiability(module, testSummary, criteria)
 
 }
 
